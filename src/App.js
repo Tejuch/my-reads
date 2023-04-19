@@ -25,7 +25,7 @@ function App() {
   return (
     <div className='app'>
       <Routes>
-        <Route path='/search' element={<Search />} />
+        <Route path='/search' element={<Search updateShelf={updateShelf} />} />
 
         <Route
           exact

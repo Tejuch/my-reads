@@ -1,8 +1,11 @@
-const BookShelfChanger = () => {
-  const changeSelf = () => {};
+import PropTypes from 'prop-types';
+const BookShelfChanger = ({ book, updateShelf }) => {
+  const handleBookShelfChange = (e) => {
+    updateShelf(book, e.target.value);
+  };
   return (
     <div className='book-shelf-changer'>
-      <select onChange={(event) => changeSelf(event.target.value)}>
+      <select onChange={handleBookShelfChange}>
         <option value='none' disabled>
           Move to...
         </option>
@@ -13,5 +16,9 @@ const BookShelfChanger = () => {
       </select>
     </div>
   );
+};
+BookShelfChanger.propTypes = {
+  book: PropTypes.object.isRequired,
+  updateShelf: PropTypes.func.isRequired
 };
 export default BookShelfChanger;

@@ -1,5 +1,5 @@
 import Book from './Book';
-
+import PropTypes from 'prop-types';
 const BookShelf = ({ title, shelf, updateShelf, books }) => {
   const bookinShelf = books.filter((book) => book.shelf === shelf);
   return (
@@ -9,13 +9,21 @@ const BookShelf = ({ title, shelf, updateShelf, books }) => {
       <ol className='books-grid'>
         {bookinShelf.map((book) => {
           return (
-            <div>
-              <Book key={book.id} book={book} updateShelf={updateShelf} />
-            </div>
+            <li key={book.id}>
+              <Book book={book} updateShelf={updateShelf} />
+            </li>
           );
         })}
       </ol>
     </div>
   );
 };
+
+BookShelf.propTypes = {
+  title: PropTypes.string.isRequired,
+  shelf: PropTypes.string.isRequired,
+  updateShelf: PropTypes.func.isRequired,
+  books: PropTypes.array.isRequired
+};
+
 export default BookShelf;

@@ -1,11 +1,7 @@
 import BookShelf from './BookShelf';
-
+import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 const BookList = ({ books, updateShelf }) => {
-  const shelfs = [
-    { type: 'currentlyReading', title: 'Currently Reading' },
-    { type: 'wantToRead', title: 'Want to Read' },
-    { type: 'read', title: 'Read' }
-  ];
   return (
     <div className='list-books'>
       <div className='list-books-title'>
@@ -32,23 +28,16 @@ const BookList = ({ books, updateShelf }) => {
             books={books}
           />
         </div>
-        {/*{shelfs.map((shelf) => {
-          <BookShelf books={books} shelf={shelf} />;
-          const booksInShelf = books.filter(
-            (book) => book.shelf === shelf.type
-          );
-
-          return (
-            <div className='bookshelf' key={index}>
-              <h2 className='bookshelf-title'>{shelf.title}</h2>
-              <div className='bookshelf-books'>
-                <BookShelf books={booksInShelf} />
-              </div>
-            </div>
-          );
-        })}*/}
+      </div>
+      <div className='open-search'>
+        <NavLink to='/search'>Add a book</NavLink>
       </div>
     </div>
   );
+};
+
+BookList.propTypes = {
+  books: PropTypes.array.isRequired,
+  updateShelf: PropTypes.func.isRequired
 };
 export default BookList;
