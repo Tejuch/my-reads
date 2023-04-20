@@ -6,8 +6,12 @@ const Search = ({ books, updateShelf }) => {
   const [query, setQuery] = useState('');
   const [newBooks, setNewBooks] = useState([]);
   const [error, setError] = useState('');
-  const searchBook = async (query, maxResults) => {
-    setQuery(query);
+  const searchBook = (query, maxResults) => {
+    let trimmedQuery = query.replace(/^\s+/, '');
+    setQuery(trimmedQuery);
+    fetchBooks(query, maxResults);
+  };
+  const fetchBooks = async (query, maxResults) => {
     if (query.length !== 0) {
       await BooksAPI.search(query, maxResults).then((searchedBooks) => {
         if (searchedBooks.length > 0) {
