@@ -1,6 +1,6 @@
 import BookShelfChanger from './BookShelfChanger';
 import PropTypes from 'prop-types';
-const Book = ({ book, updateShelf }) => {
+const Book = ({ book, updateShelf, currentShelf }) => {
   return (
     <div className='book'>
       <div className='book-top'>
@@ -13,7 +13,11 @@ const Book = ({ book, updateShelf }) => {
               book.imageLinks && `url(${book.imageLinks.thumbnail})`
           }}
         ></div>
-        <BookShelfChanger book={book} updateShelf={updateShelf} />
+        <BookShelfChanger
+          book={book}
+          updateShelf={updateShelf}
+          currentShelf={currentShelf}
+        />
       </div>
       <div className='book-title'>{book.title}</div>
       <div className='book-authors'>{book.authors && book.authors[0]}</div>
@@ -22,6 +26,7 @@ const Book = ({ book, updateShelf }) => {
 };
 Book.propTypes = {
   book: PropTypes.object.isRequired,
-  updateShelf: PropTypes.func.isRequired
+  updateShelf: PropTypes.func.isRequired,
+  currentShelf: PropTypes.string.isRequired
 };
 export default Book;

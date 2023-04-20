@@ -10,7 +10,11 @@ const BookShelf = ({ title, shelf, updateShelf, books }) => {
         {bookinShelf.map((book) => {
           return (
             <li key={book.id}>
-              <Book book={book} updateShelf={updateShelf} />
+              <Book
+                book={book}
+                updateShelf={updateShelf}
+                currentShelf={shelf}
+              />
             </li>
           );
         })}

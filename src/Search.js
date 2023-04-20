@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import * as BooksAPI from './BooksAPI';
 import Book from './Book';
-const Search = ({ updateShelf }) => {
+const Search = ({ books, updateShelf }) => {
   const [query, setQuery] = useState('');
   const [newBooks, setNewBooks] = useState([]);
   const [error, setError] = useState('');
   const searchBook = async (query, maxResults) => {
     setQuery(query);
-    if (query) {
+    if (query.length !== 0) {
       await BooksAPI.search(query, maxResults).then((searchedBooks) => {
         if (searchedBooks.length > 0) {
           setNewBooks(searchedBooks);
@@ -19,15 +19,16 @@ const Search = ({ updateShelf }) => {
         }
       });
     } else {
-      setError(false);
+      setNewBooks([]);
+      setError(true);
     }
   };
   return (
     <div className='search-books'>
       <div className='search-books-bar'>
-        <NavLink to='/' className='close-search'>
+        <Link to='/' className='close-search'>
           Close
-        </NavLink>
+        </Link>
         <div className='search-books-input-wrapper'>
           <input
             type='text'
@@ -40,9 +41,22 @@ const Search = ({ updateShelf }) => {
       <div className='search-books-results'>
         {newBooks.length > 0 && (
           <ol className='books-grid'>
-            {newBooks.map((book) => (
-              <Book key={book.id} book={book} updateShelf={updateShelf} />
-            ))}
+            {newBooks.map((newBook) => {
+              let shelf = 'none';
+              books.forEach((book) => {
+                if (book.id === newBook.id) {
+                  shelf = book.shelf;
+                }
+              });
+              return (
+                <Book
+                  key={newBook.id}
+                  book={newBook}
+                  updateShelf={updateShelf}
+                  currentShelf={shelf}
+                />
+              );
+            })}
           </ol>
         )}
         {error && (

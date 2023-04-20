@@ -1,11 +1,11 @@
 import PropTypes from 'prop-types';
-const BookShelfChanger = ({ book, updateShelf }) => {
-  const handleBookShelfChange = (e) => {
-    updateShelf(book, e.target.value);
-  };
+const BookShelfChanger = ({ book, updateShelf, currentShelf }) => {
   return (
     <div className='book-shelf-changer'>
-      <select onChange={handleBookShelfChange}>
+      <select
+        onChange={(e) => updateShelf(book, e.target.value)}
+        value={currentShelf}
+      >
         <option value='none' disabled>
           Move to...
         </option>
