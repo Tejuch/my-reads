@@ -1,5 +1,4 @@
 MyReads Project
-About :
 This is a digital bookshelf app and it represents different bookshelfs to store your books and track what you're reading.
 
 It supports three shelves:
