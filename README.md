@@ -1,9 +1,9 @@
-MyReads Project
+MyReads Project:
 This is a digital bookshelf app and it represents different bookshelfs to store your books and track what you're reading.
 
 It supports three shelves:
-Currently Reading.
-Want to Read.
+Currently Reading,
+Want to Read,
 Read.
 And you can search and add books to any shelf.
 
