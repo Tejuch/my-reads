@@ -18,8 +18,10 @@ function App() {
   }, []);
 
   const updateShelf = async (bookNew, newshelf) => {
-    BooksAPI.update(bookNew, newshelf);
-    getAllBooks();
+    bookNew.shelf = newshelf;
+    BooksAPI.update(bookNew, newshelf).then(() => {
+      setBooks([...books.filter((b) => b.id !== bookNew.id), bookNew]);
+    });
   };
 
   return (
